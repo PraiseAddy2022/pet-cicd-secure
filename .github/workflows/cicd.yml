@@ -118,15 +118,15 @@ jobs:
         run: mvn -B compile -DskipTests
  
       - name: SonarQube code analysis
-        uses: SonarSource/sonarqube-scan-action@v4
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
-            -Dsonar.organization=${{ env.SONAR_ORGANIZATION }}
-            -Dsonar.java.binaries=target/classes
+            "-Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}"
+            "-Dsonar.organization=${{ env.SONAR_ORGANIZATION }}"
+            "-Dsonar.java.binaries=target/classes"
  
       - name: SonarCloud Quality Gate Check
         id: quality-gate
@@ -137,5 +137,5 @@ jobs:
           sonar-token: ${{ env.SONAR_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           branch: dev
-          fail-on–quality-gate-error: true
+          fail-on-quality-gate-error: true
        
